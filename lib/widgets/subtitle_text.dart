@@ -8,7 +8,8 @@ class SubTitleWidget extends StatelessWidget {
       this.fontStyle = FontStyle.normal,
       this.fontWeight = FontWeight.normal,
       this.color,
-      this.textDecoration = TextDecoration.none});
+      this.textDecoration = TextDecoration.none,
+      required int fontSize});
   final String label;
   final double fontsize;
   final FontStyle fontStyle;

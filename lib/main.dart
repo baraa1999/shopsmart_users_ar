@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/consts/theme_data.dart';
 import 'package:shopsmart_users_ar/providers/theme_provider.dart';
+import 'package:shopsmart_users_ar/root_screen.dart';
 import 'package:shopsmart_users_ar/screens/home_screen.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           title: 'Shop Smart AR',
           theme: Styless.themeData(
               isDarkthme: themeProvider.getIsDarkTheme, context: context),
-          home: const HomeScreen(),
+          home: const RootScreen(),
         );
       }),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/providers/theme_provider.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
@@ -17,12 +19,12 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SubTitleWidget(
-            label: 'Hi again',
-            fontsize: 60,
+            label: "Hi again!",
+            fontSize: 60,
             color: Colors.red,
           ),
           TitlesTextWidget(
-            label: 'This is a title' * 10,
+            label: "This is a title" * 10,
             fontSize: 50,
             maxLines: 2,
           ),
