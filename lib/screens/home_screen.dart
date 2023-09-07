@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SubTitleWidget(
+          const SubtitleTextWidget(
             label: "Hi again!",
             fontSize: 60,
             color: Colors.red,

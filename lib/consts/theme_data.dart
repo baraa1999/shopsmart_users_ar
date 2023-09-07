@@ -11,6 +11,14 @@ class Styless {
         cardColor: isDarkthme
             ? const Color.fromARGB(255, 13, 6, 37)
             : AppColor.lightCardColor,
-        brightness: isDarkthme ? Brightness.dark : Brightness.light);
+        brightness: isDarkthme ? Brightness.dark : Brightness.light,
+        appBarTheme: AppBarTheme(
+            backgroundColor: isDarkthme
+                ? AppColor.darkScaffoldcolor
+                : AppColor.lightScaffoldcolor,
+            elevation: 0,
+            centerTitle: false,
+            titleTextStyle:
+                TextStyle(color: isDarkthme ? Colors.white : Colors.black)));
   }
 }
