@@ -19,7 +19,7 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CartScreen(),
+    const CardScreen(),
     const ProfileScreen()
   ];
   @override
