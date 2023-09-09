@@ -13,6 +13,8 @@ class Styless {
             : AppColor.lightCardColor,
         brightness: isDarkthme ? Brightness.dark : Brightness.light,
         appBarTheme: AppBarTheme(
+            iconTheme:
+                IconThemeData(color: isDarkthme ? Colors.white : Colors.black),
             backgroundColor: isDarkthme
                 ? AppColor.darkScaffoldcolor
                 : AppColor.lightScaffoldcolor,
