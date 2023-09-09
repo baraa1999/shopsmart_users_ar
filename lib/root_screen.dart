@@ -15,11 +15,11 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   late PageController controller;
-  int currentScreen = 3;
+  int currentScreen = 2;
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CardScreen(),
+    const CartScreen(),
     const ProfileScreen()
   ];
   @override

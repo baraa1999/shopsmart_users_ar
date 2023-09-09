@@ -8,6 +8,7 @@ import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 import '../providers/theme_provider.dart';
+import '../widgets/app_name_text.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -17,8 +18,13 @@ class ProfileScreen extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Profile screen"),
-          leading: Image.asset(AssetsManager.shoppingCart),
+          title: const AppNameText(
+            fontsize: 20,
+          ),
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AssetsManager.shoppingCart),
+          ),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
