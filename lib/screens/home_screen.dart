@@ -1,12 +1,14 @@
+import 'dart:developer';
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/consts/app_constants.dart';
 import 'package:shopsmart_users_ar/providers/theme_provider.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
+import 'package:shopsmart_users_ar/widgets/products/latest_arrival.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
@@ -31,27 +33,52 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: size.height * 0.24,
-              child: ClipRRect(
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Image.asset(
-                      AppContants.bannersImages[index],
-                      fit: BoxFit.fill,
-                    );
-                  },
-                  autoplay: true,
-                  itemCount: AppContants.bannersImages.length,
-                  pagination: SwiperPagination(
-                      alignment: Alignment.bottomCenter,
-                      builder: DotSwiperPaginationBuilder(
-                          color: Colors.white, activeColor: Colors.red)),
+            GestureDetector(
+              onTap: () {
+                log('Todo navigate to the product details screen');
+              },
+              child: SizedBox(
+                height: size.height * 0.24,
+                child: ClipRRect(
+                  child: Swiper(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.asset(
+                        AppContants.bannersImages[index],
+                        fit: BoxFit.fill,
+                      );
+                    },
+                    autoplay: true,
+                    itemCount: AppContants.bannersImages.length,
+                    pagination: const SwiperPagination(
+                        alignment: Alignment.bottomCenter,
+                        builder: DotSwiperPaginationBuilder(
+                            color: Colors.white, activeColor: Colors.red)),
+                  ),
                 ),
               ),
             ),
+            const SizedBox(
+              height: 18,
+            ),
+            const TitlesTextWidget(
+              label: "Last arival",
+              fontSize: 22,
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            SizedBox(
+              height: size.height * 0.2,
+              child: ListView.builder(
+                  itemCount: 10,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return const LatestArrivalProductWidget();
+                  }),
+            )
           ],
         ),
       ),
