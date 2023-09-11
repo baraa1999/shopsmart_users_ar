@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
+import 'package:shopsmart_users_ar/widgets/products/product_widget.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -35,9 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const AppNameText(
-              fontsize: 20,
-            ),
+            title: const TitlesTextWidget(label: "Search"),
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(AssetsManager.shoppingCart),
@@ -47,6 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                const SizedBox(height: 15),
                 TextField(
                   controller: searchTextController,
                   decoration: InputDecoration(
@@ -69,6 +70,15 @@ class _SearchScreenState extends State<SearchScreen> {
                     log(searchTextController.text);
                   },
                 ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: DynamicHeightGridView(
+                      itemCount: 220,
+                      builder: (context, index) {
+                        return const ProductWidget();
+                      },
+                      crossAxisCount: 2),
+                )
               ],
             ),
           )),
