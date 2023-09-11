@@ -29,7 +29,9 @@ class CartBottomCheckout extends StatelessWidget {
                   children: [
                     FittedBox(
                         child: TitlesTextWidget(
-                            label: "Total (6 products/6 Items)")),
+                      label: "Total (6 products/6 Items)",
+                      fontSize: 18,
+                    )),
                     SubtitleTextWidget(
                       label: "16.99\$",
                       color: Colors.blue,
@@ -39,7 +41,9 @@ class CartBottomCheckout extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text("Checkout"),
+                child: const Text(
+                  "Checkout",
+                ),
               ),
             ],
           ),
