@@ -37,7 +37,11 @@ class _ProductWidgetState extends State<ProductWidget> {
             Row(
               children: [
                 Flexible(
-                    flex: 5, child: TitlesTextWidget(label: "Titile" * 10)),
+                    flex: 5,
+                    child: TitlesTextWidget(
+                      label: "Titile" * 10,
+                      maxLines: 2,
+                    )),
                 Flexible(
                     child: IconButton(
                         onPressed: () {}, icon: const Icon(IconlyLight.heart)))
