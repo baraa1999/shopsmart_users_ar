@@ -1,26 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:shopsmart_users_ar/consts/app_colors.dart';
 
-class Styless {
-  static ThemeData themeData(
-      {required bool isDarkthme, required BuildContext context}) {
+import 'app_colors.dart';
+
+class Styles {
+  static ThemeData themeData({
+    required bool isDarkTheme,
+    required BuildContext context,
+  }) {
     return ThemeData(
-        scaffoldBackgroundColor: isDarkthme
+      scaffoldBackgroundColor: isDarkTheme
+          ? AppColor.darkScaffoldcolor
+          : AppColor.lightScaffoldcolor,
+      cardColor: isDarkTheme
+          ? const Color.fromARGB(255, 13, 6, 37)
+          : AppColor.lightCardColor,
+      brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+      appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(
+          color: isDarkTheme ? Colors.white : Colors.black,
+        ),
+        backgroundColor: isDarkTheme
             ? AppColor.darkScaffoldcolor
             : AppColor.lightScaffoldcolor,
-        cardColor: isDarkthme
-            ? const Color.fromARGB(255, 13, 6, 37)
-            : AppColor.lightCardColor,
-        brightness: isDarkthme ? Brightness.dark : Brightness.light,
-        appBarTheme: AppBarTheme(
-            iconTheme:
-                IconThemeData(color: isDarkthme ? Colors.white : Colors.black),
-            backgroundColor: isDarkthme
-                ? AppColor.darkScaffoldcolor
-                : AppColor.lightScaffoldcolor,
-            elevation: 0,
-            centerTitle: false,
-            titleTextStyle:
-                TextStyle(color: isDarkthme ? Colors.white : Colors.black)));
+        elevation: 0,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          color: isDarkTheme ? Colors.white : Colors.black,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        contentPadding: const EdgeInsets.all(10),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 1,
+            color: Colors.transparent,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: isDarkTheme ? Colors.white : Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
   }
 }
