@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shopsmart_users_ar/consts/app_constants.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
+import 'package:shopsmart_users_ar/widgets/products/heart_btn.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
@@ -76,12 +77,8 @@ class ProductDetails extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Material(
-                        color: Colors.teal.shade200,
-                        shape: const CircleBorder(),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(IconlyLight.heart)),
+                      HeartButtonWidget(
+                        color: Colors.blue.shade300,
                       ),
                       const SizedBox(
                         width: 10,
