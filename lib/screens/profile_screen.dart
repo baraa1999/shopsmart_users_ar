@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const AppNameText(
-            fontsize: 20,
+            fontSize: 20,
           ),
           leading: Padding(
             padding: const EdgeInsets.all(8.0),

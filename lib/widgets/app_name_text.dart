@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class AppNameText extends StatelessWidget {
-  const AppNameText({super.key, this.fontsize = 30});
+  const AppNameText({super.key, this.fontsize = 30, required int fontSize});
   final double fontsize;
 
   @override
