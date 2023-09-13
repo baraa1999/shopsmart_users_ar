@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shopsmart_users_ar/screens/cart/cart_screen.dart';
 import 'package:shopsmart_users_ar/screens/home_screen.dart';

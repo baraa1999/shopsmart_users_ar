@@ -1,13 +1,14 @@
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:shopsmart_users_ar/screens/cart/bottom_cheakout.dart';
-import 'package:shopsmart_users_ar/screens/cart/cart_widget.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/empty_bag.dart';
+import 'package:shopsmart_users_ar/widgets/products/product_widget.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
-class CardScreen extends StatelessWidget {
-  const CardScreen({super.key});
+class WishListScreen extends StatelessWidget {
+  const WishListScreen({super.key});
   final bool isEmpty = false;
+  static const routeName = '/WishListScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +17,13 @@ class CardScreen extends StatelessWidget {
         ? Scaffold(
             body: EmptyBagWidget(
                 imagePath: AssetsManager.shoppingBasket,
-                title: "You cart is empty",
+                title: "You WishList is empty",
                 subtitle:
                     'Looks like you didn\'t add anything yet to your cart \ngo ahead and start shopping now',
                 buttonText: 'Shop Now'))
         : Scaffold(
-            bottomSheet: const CartBottomCheckout(),
             appBar: AppBar(
-              title: const TitlesTextWidget(label: 'Cart (5)'),
+              title: const TitlesTextWidget(label: 'WishList (5)'),
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(AssetsManager.shoppingCart),
@@ -37,11 +37,11 @@ class CardScreen extends StatelessWidget {
                     ))
               ],
             ),
-            body: ListView.builder(
-                itemCount: 15,
-                itemBuilder: (context, index) {
-                  return const CartWidget();
-                }),
-          );
+            body: DynamicHeightGridView(
+                itemCount: 220,
+                builder: (context, index) {
+                  return const ProductWidget();
+                },
+                crossAxisCount: 2));
   }
 }

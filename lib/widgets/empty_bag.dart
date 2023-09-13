@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopsmart_users_ar/services/assets_manger.dart';
 
 import 'subtitle_text.dart';
 import 'titile_text.dart';

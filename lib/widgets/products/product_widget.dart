@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shopsmart_users_ar/consts/app_constants.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/product_details.dart';
 import 'package:shopsmart_users_ar/widgets/products/heart_btn.dart';

@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
-import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/products/product_widget.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 

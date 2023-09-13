@@ -18,7 +18,7 @@ class CategoryRoundedWidget extends StatelessWidget {
           height: 50,
           width: 50,
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         SubtitleTextWidget(

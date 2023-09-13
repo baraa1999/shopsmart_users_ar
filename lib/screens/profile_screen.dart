@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
@@ -92,7 +91,9 @@ class ProfileScreen extends StatelessWidget {
                     CustomListTile(
                       imagePath: AssetsManager.wishlistSvg,
                       text: "Wishlist",
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(context, WishListScreen.routeName);
+                      },
                     ),
                     CustomListTile(
                       imagePath: AssetsManager.recent,

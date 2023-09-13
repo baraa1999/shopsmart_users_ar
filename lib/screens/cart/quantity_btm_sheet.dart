@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 
