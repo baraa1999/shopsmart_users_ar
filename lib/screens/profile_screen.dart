@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
+import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
@@ -149,11 +150,17 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onPressed: () {},
                   icon: const Icon(Icons.login),
                   label: const Text(
                     "Login",
                   ),
+                  onPressed: () async {
+                    await MyAppMethode.showErrorOrwarningDialog(
+                        context: context,
+                        subtitle: 'Are you Sure',
+                        fct: () {},
+                        isError: false);
+                  },
                 ),
               ),
             ],
