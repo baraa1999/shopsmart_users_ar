@@ -5,10 +5,10 @@ import 'package:shopsmart_users_ar/widgets/empty_bag.dart';
 import 'package:shopsmart_users_ar/widgets/products/product_widget.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
-class WishListScreen extends StatelessWidget {
-  const WishListScreen({super.key});
-  final bool isEmpty = true;
-  static const routeName = '/WishListScreen';
+class ViewedRecentlyScreen extends StatelessWidget {
+  const ViewedRecentlyScreen({super.key});
+  final bool isEmpty = false;
+  static const routeName = '/ViewedRecentlyScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class WishListScreen extends StatelessWidget {
     return isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
-                imagePath: AssetsManager.bagWish,
-                title: "You WishList is empty",
+                imagePath: AssetsManager.shoppingBasket,
+                title: "You Viewed Recentlu is empty",
                 subtitle:
                     'Looks like you didn\'t add anything yet to your cart \ngo ahead and start shopping now',
                 buttonText: 'Shop Now'))
         : Scaffold(
             appBar: AppBar(
-              title: const TitlesTextWidget(label: 'WishList (5)'),
+              title: const TitlesTextWidget(label: 'ViewdRecently (5)'),
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(AssetsManager.shoppingCart),
