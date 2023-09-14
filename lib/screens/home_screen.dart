@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const AppNameText(
+        title: const AppNameTextWidget(
           fontSize: 20,
         ),
         leading: Padding(

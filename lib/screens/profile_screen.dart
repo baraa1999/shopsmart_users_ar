@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const AppNameText(
+          title: const AppNameTextWidget(
             fontSize: 20,
           ),
           leading: Padding(
