@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart_users_ar/screens/auth/login.dart';
+import 'package:shopsmart_users_ar/screens/inner_screens/orders/orders_screen.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
@@ -88,7 +90,10 @@ class ProfileScreen extends StatelessWidget {
                     CustomListTile(
                       imagePath: AssetsManager.orderSvg,
                       text: "All orders",
-                      function: () {},
+                      function: () async {
+                        await Navigator.pushNamed(
+                            context, OrdersScreenFree.routeName);
+                      },
                     ),
                     CustomListTile(
                       imagePath: AssetsManager.wishlistSvg,
@@ -155,11 +160,12 @@ class ProfileScreen extends StatelessWidget {
                     "Login",
                   ),
                   onPressed: () async {
-                    await MyAppMethode.showErrorOrwarningDialog(
-                        context: context,
-                        subtitle: 'Are you Sure',
-                        fct: () {},
-                        isError: false);
+                    await Navigator.pushNamed(context, LoginScreen.routName);
+                    // await MyAppMethods.showErrorORWarningDialog(
+                    //     context: context,
+                    //     subtitle: 'Are you Sure',
+                    //     fct: () {},
+                    //     isError: false);
                   },
                 ),
               ),

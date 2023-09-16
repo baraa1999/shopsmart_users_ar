@@ -27,8 +27,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _confirmPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
-  XFile? pickedImage;
 
+  XFile? _pickedImage;
   @override
   void initState() {
     _nameController = TextEditingController();
@@ -60,13 +60,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+    if (_pickedImage == null) {
+      MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "Make sure to pick up an image",
+          fct: () {});
+    }
     if (isValid) {}
+  }
+
+  Future<void> localImagePicker() async {
+    final ImagePicker picker = ImagePicker();
+    await MyAppMethods.imagePickerDialog(
+      context: context,
+      cameraFCT: () async {
+        _pickedImage = await picker.pickImage(source: ImageSource.camera);
+        setState(() {});
+      },
+      galleryFCT: () async {
+        _pickedImage = await picker.pickImage(source: ImageSource.gallery);
+        setState(() {});
+      },
+      removeFCT: () {
+        setState(() {
+          _pickedImage = null;
+        });
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -100,21 +125,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 16.0,
                 ),
                 SizedBox(
-                  width: size.width * 0.3,
                   height: size.width * 0.3,
+                  width: size.width * 0.3,
                   child: PickImageWidget(
-                    pickedImage: pickedImage,
+                    pickedImage: _pickedImage,
                     function: () async {
-                      await MyAppMethode.imagePickerDialog(
-                          context: context,
-                          cameraFct: () {},
-                          galleryFct: () {},
-                          removeFct: () {});
+                      await localImagePicker();
                     },
                   ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 16.0,
                 ),
                 Form(
                   key: _formKey,

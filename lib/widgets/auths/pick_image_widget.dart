@@ -7,7 +7,6 @@ class PickImageWidget extends StatelessWidget {
   const PickImageWidget({super.key, this.pickedImage, required this.function});
   final XFile? pickedImage;
   final Function function;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -15,12 +14,13 @@ class PickImageWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.0),
             child: pickedImage == null
                 ? Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all()),
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(),
+                    ),
                   )
                 : Image.file(
                     File(

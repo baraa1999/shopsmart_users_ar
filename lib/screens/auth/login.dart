@@ -8,6 +8,7 @@ import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routName = '/LoginScreen';
   const LoginScreen({super.key});
 
   @override
