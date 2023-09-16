@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shopsmart_users_ar/consts/my_valditors.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
+import 'package:shopsmart_users_ar/widgets/auths/pick_image_widget.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
@@ -24,6 +26,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _confirmPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
+  XFile? pickedImage;
+
   @override
   void initState() {
     _nameController = TextEditingController();
@@ -60,6 +64,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -91,6 +97,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(
                   height: 16.0,
+                ),
+                SizedBox(
+                  width: size.width * 0.3,
+                  height: size.width * 0.3,
+                  child: PickImageWidget(
+                    pickedImage: pickedImage,
+                    function: () {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
                 Form(
                   key: _formKey,
