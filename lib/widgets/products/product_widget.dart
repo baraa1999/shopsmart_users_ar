@@ -7,7 +7,8 @@ import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+  final String? image, title, price;
+  const ProductWidget({super.key, this.image, this.title, this.price});
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -28,7 +29,8 @@ class _ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(30.0),
               child: FancyShimmerImage(
-                imageUrl: AppContants.productImageUrl,
+                // if the image is null or not null
+                imageUrl: widget.image ?? AppContants.productImageUrl,
                 width: double.infinity,
                 height: size.height * 0.22,
               ),
@@ -39,7 +41,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                 Flexible(
                     flex: 5,
                     child: TitlesTextWidget(
-                      label: "Titile" * 10,
+                      // title
+                      label: widget.title ?? "Titles" * 10,
                       maxLines: 2,
                       fontSize: 18,
                     )),
@@ -55,8 +58,11 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
-                      flex: 3, child: SubtitleTextWidget(label: "16.99\$")),
+                  Flexible(
+                      // price
+                      flex: 3,
+                      child: SubtitleTextWidget(
+                          label: "${widget.price}\$" ?? "16.99\$")),
                   Flexible(
                     child: Material(
                       borderRadius: BorderRadius.circular(16.0),
