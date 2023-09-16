@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopsmart_users_ar/consts/my_valditors.dart';
+import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/auths/pick_image_widget.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
@@ -103,7 +104,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: size.width * 0.3,
                   child: PickImageWidget(
                     pickedImage: pickedImage,
-                    function: () {},
+                    function: () async {
+                      await MyAppMethode.imagePickerDialog(
+                          context: context,
+                          cameraFct: () {},
+                          galleryFct: () {},
+                          removeFct: () {});
+                    },
                   ),
                 ),
                 const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
+import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class MyAppMethode {
   static Future<void> showErrorOrwarningDialog(
@@ -65,5 +66,57 @@ class MyAppMethode {
         );
       },
     );
+  }
+
+  static Future<void> imagePickerDialog({
+    required BuildContext context,
+    required Function cameraFct,
+    required Function galleryFct,
+    required Function removeFct,
+  }) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: TitlesTextWidget(label: "Choose Option"),
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        cameraFct();
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.camera),
+                      label: const Text(
+                        'Camera',
+                      )),
+                  TextButton.icon(
+                      onPressed: () {
+                        galleryFct();
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.image),
+                      label: const Text('Gallery')),
+                  TextButton.icon(
+                      onPressed: () {
+                        removeFct();
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.remove),
+                      label: const Text('Remove')),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
