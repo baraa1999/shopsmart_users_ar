@@ -5,6 +5,7 @@ import 'package:shopsmart_users_ar/providers/theme_provider.dart';
 import 'package:shopsmart_users_ar/screens/auth/forget_password.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
+import 'package:shopsmart_users_ar/screens/search_screen.dart';
 
 import 'consts/theme_data.dart';
 import 'root_screen.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
             OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
             ForgotPasswordScreen.routeName: (context) =>
                 const ForgotPasswordScreen(),
+            SearchScreen.routeName: (context) => const SearchScreen(),
           },
         );
       }),

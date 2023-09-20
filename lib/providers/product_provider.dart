@@ -9,12 +9,23 @@ class ProductProvider with ChangeNotifier {
     return _products;
   }
 
+// // list found inside function find By id
   ProductModel? findByproId(String productId) {
     if (_products.where((element) => element.productId == productId).isEmpty) {
       return null;
     } else {
       return _products.firstWhere((element) => element.productId == productId);
     }
+  }
+
+// list found inside function find By category
+  List<ProductModel> findByCategory({required String ctgName}) {
+    List<ProductModel> ctgList = _products
+        .where((element) => element.productCategory
+            .toLowerCase()
+            .contains(ctgName.toLowerCase()))
+        .toList();
+    return ctgList;
   }
 
   // list all product
