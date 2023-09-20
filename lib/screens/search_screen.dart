@@ -31,6 +31,8 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+  List<ProductModel> productListSearch = [];
+
   @override
   Widget build(BuildContext context) {
     //  call provider product
@@ -65,6 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       TextField(
                         controller: searchTextController,
                         decoration: InputDecoration(
+                          hintText: 'Search',
                           filled: true,
                           prefixIcon: const Icon(Icons.search),
                           suffixIcon: GestureDetector(
@@ -80,23 +83,42 @@ class _SearchScreenState extends State<SearchScreen> {
                                 color: Colors.red,
                               )),
                         ),
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          // setState(() {
+                          //   productListSearch = productProvider.searchQuery(
+                          //       searchText: searchTextController.text);
+                          // });
+                        },
                         onSubmitted: (value) {
-                          log(searchTextController.text);
+                          setState(() {
+                            productListSearch = productProvider.searchQuery(
+                                searchText: searchTextController.text,
+                                passedList: productList);
+                          });
                         },
                       ),
                       const SizedBox(height: 15),
+                      // 3 point return more than widget
+                      if (searchTextController.text.isNotEmpty &&
+                          productListSearch.isEmpty) ...[
+                        const Center(
+                            child: TitlesTextWidget(
+                          label: 'No result found ',
+                          fontSize: 40,
+                        ))
+                      ],
                       Expanded(
                         child: DynamicHeightGridView(
-                            itemCount: productList.length,
+                            itemCount: searchTextController.text.isNotEmpty
+                                ? productListSearch.length
+                                : productList.length,
                             builder: (context, index) {
                               //
-                              return ChangeNotifierProvider.value(
-                                value: productList[index],
-                                child: ProductWidget(
-                                  productId: productList[index].productId,
-                                ),
-                              );
+                              return ProductWidget(
+                                  productId:
+                                      searchTextController.text.isNotEmpty
+                                          ? productListSearch[index].productId
+                                          : productList[index].productId);
                             },
                             crossAxisCount: 2),
                       )

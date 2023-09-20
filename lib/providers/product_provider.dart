@@ -28,6 +28,17 @@ class ProductProvider with ChangeNotifier {
     return ctgList;
   }
 
+  // list found inside function find By searchText
+  List<ProductModel> searchQuery(
+      {required String searchText, required List<ProductModel> passedList}) {
+    List<ProductModel> searchList = passedList
+        .where((element) => element.productTitle
+            .toLowerCase()
+            .contains(searchText.toLowerCase()))
+        .toList();
+    return searchList;
+  }
+
   // list all product
   final List<ProductModel> _products = [
     // Phones
