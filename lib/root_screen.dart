@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/screens/cart/cart_screen.dart';
 import 'package:shopsmart_users_ar/screens/home_screen.dart';
 import 'package:shopsmart_users_ar/screens/profile_screen.dart';
@@ -18,7 +20,7 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CardScreen(),
+    const CartScreen(),
     const ProfileScreen()
   ];
   @override
@@ -31,6 +33,8 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       body: PageView(
         controller: controller,
@@ -48,26 +52,26 @@ class _RootScreenState extends State<RootScreen> {
           });
           controller.jumpToPage(currentScreen);
         },
-        destinations: const [
-          NavigationDestination(
+        destinations: [
+          const NavigationDestination(
             selectedIcon: Icon(IconlyBold.home),
             icon: Icon(IconlyLight.home),
             label: "Home",
           ),
-          NavigationDestination(
+          const NavigationDestination(
             selectedIcon: Icon(IconlyBold.search),
             icon: Icon(IconlyLight.search),
             label: "Search",
           ),
           NavigationDestination(
-            selectedIcon: Icon(IconlyBold.bag2),
+            selectedIcon: const Icon(IconlyBold.bag2),
             icon: Badge(
-                label: Text('6'),
+                label: Text(cartProvider.getCartItems.length.toString()),
                 backgroundColor: Colors.blue,
-                child: Icon(IconlyLight.bag2)),
+                child: const Icon(IconlyLight.bag2)),
             label: "Cart",
           ),
-          NavigationDestination(
+          const NavigationDestination(
             selectedIcon: Icon(IconlyBold.profile),
             icon: Icon(IconlyLight.profile),
             label: "Profile",
