@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/consts/app_constants.dart';
+import 'package:shopsmart_users_ar/providers/product_provider.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/products/ctg_rounded_widget.dart';
@@ -15,6 +17,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productProvider = Provider.of<ProductProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const AppNameTextWidget(
@@ -72,7 +76,9 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 10,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return const LatestArrivalProductWidget();
+                      return ChangeNotifierProvider.value(
+                          value: productProvider.getProduct[index],
+                          child: const LatestArrivalProductWidget());
                     }),
               ),
               const TitlesTextWidget(

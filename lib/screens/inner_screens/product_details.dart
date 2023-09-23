@@ -89,6 +89,7 @@ class ProductDetails extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               HeartButtonWidget(
+                                productId: getCurrentProduct.productId,
                                 color: Colors.blue.shade300,
                               ),
                               const SizedBox(
