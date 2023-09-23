@@ -97,7 +97,9 @@ class CartWidget extends StatelessWidget {
                                     ),
                                     context: context,
                                     builder: (context) {
-                                      return const QunitityBottomSheetWidget();
+                                      return QunitityBottomSheetWidget(
+                                        cartModel: cartModelProvider,
+                                      );
                                     },
                                   );
                                 },

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopsmart_users_ar/models/cart_model.dart';
+import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 
 class QunitityBottomSheetWidget extends StatelessWidget {
-  const QunitityBottomSheetWidget({super.key});
+  const QunitityBottomSheetWidget({super.key, required this.cartModel});
+  final CartModel cartModel;
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -29,7 +34,9 @@ class QunitityBottomSheetWidget extends StatelessWidget {
                 // تقدر تكبس عل كل value
                 return InkWell(
                   onTap: () {
-                    print("index +1  $index");
+                    cartProvider.updateQuantity(
+                        productId: cartModel.productId, quantity: index + 1);
+                    Navigator.pop(context);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(3.0),
