@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/consts/app_constants.dart';
+import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/screens/cart/quantity_btm_sheet.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
@@ -21,6 +22,8 @@ class CartWidget extends StatelessWidget {
     final getCurrProduct =
         productProvider.findByproId(cartModelProvider.productId);
     Size size = MediaQuery.of(context).size;
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return getCurrProduct == null
         ? const SizedBox.shrink()
         : FittedBox(
@@ -55,7 +58,10 @@ class CartWidget extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cartProvider.removeOneItem(
+                                          productId: getCurrProduct.productId);
+                                    },
                                     icon: const Icon(
                                       Icons.clear,
                                       color: Colors.red,

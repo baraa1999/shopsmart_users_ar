@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/screens/cart/bottom_cheakout.dart';
 import 'package:shopsmart_users_ar/screens/cart/cart_widget.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
+import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/empty_bag.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
@@ -35,7 +36,15 @@ class CartScreen extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    MyAppMethods.showErrorORWarningDialog(
+                        isError: false,
+                        context: context,
+                        subtitle: 'Remove Items',
+                        fct: () {
+                          cartProvider.clearLocalCart();
+                        });
+                  },
                   icon: const Icon(
                     Icons.delete_forever_rounded,
                     color: Colors.red,
