@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/providers/product_provider.dart';
 import 'package:shopsmart_users_ar/providers/theme_provider.dart';
+import 'package:shopsmart_users_ar/providers/viewed_product_provider.dart';
 import 'package:shopsmart_users_ar/providers/wishlist_provider.dart';
 import 'package:shopsmart_users_ar/screens/auth/forget_password.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
@@ -16,7 +18,9 @@ import 'screens/auth/register.dart';
 import 'screens/inner_screens/orders/orders_screen.dart';
 import 'screens/inner_screens/product_details.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -44,6 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => WishListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ViewedProdProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(builder: (

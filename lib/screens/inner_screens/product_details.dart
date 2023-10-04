@@ -1,7 +1,6 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users_ar/consts/app_constants.dart';
 import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/providers/product_provider.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';

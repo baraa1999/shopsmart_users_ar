@@ -1,8 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users_ar/consts/app_constants.dart';
 import 'package:shopsmart_users_ar/models/product_model.dart';
+import 'package:shopsmart_users_ar/providers/viewed_product_provider.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/product_details.dart';
 import 'package:shopsmart_users_ar/widgets/products/heart_btn.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
@@ -14,12 +14,15 @@ class LatestArrivalProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productModel = Provider.of<ProductModel>(context);
+    final viewdProvider = Provider.of<ViewedProdProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.pushNamed(context, ProductDetails.routeName);
+          viewdProvider.addProductToHistory(productId: productModel.productId);
+          await Navigator.pushNamed(context, ProductDetails.routeName,
+              arguments: productModel.productId);
         },
         child: SizedBox(
           width: size.width * 0.45,

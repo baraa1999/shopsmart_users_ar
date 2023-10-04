@@ -1,5 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopsmart_users_ar/providers/viewed_product_provider.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/widgets/empty_bag.dart';
 import 'package:shopsmart_users_ar/widgets/products/product_widget.dart';
@@ -7,13 +9,14 @@ import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 class ViewedRecentlyScreen extends StatelessWidget {
   const ViewedRecentlyScreen({super.key});
-  final bool isEmpty = false;
   static const routeName = '/ViewedRecentlyScreen';
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return isEmpty
+    final viewdProvider = Provider.of<ViewedProdProvider>(context);
+
+    return viewdProvider.getviewedProdItems.isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
                 imagePath: AssetsManager.shoppingBasket,
@@ -23,7 +26,9 @@ class ViewedRecentlyScreen extends StatelessWidget {
                 buttonText: 'Shop Now'))
         : Scaffold(
             appBar: AppBar(
-              title: const TitlesTextWidget(label: 'ViewdRecently (5)'),
+              title: TitlesTextWidget(
+                  label:
+                      'ViewdRecently (${viewdProvider.getviewedProdItems.length})'),
               leading: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(AssetsManager.shoppingCart),
@@ -38,10 +43,15 @@ class ViewedRecentlyScreen extends StatelessWidget {
               ],
             ),
             body: DynamicHeightGridView(
-                itemCount: 220,
+                itemCount: viewdProvider.getviewedProdItems.length,
                 builder: (context, index) {
-                  return const ProductWidget(
-                    productId: "",
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ProductWidget(
+                      productId: viewdProvider.getviewedProdItems.values
+                          .toList()[index]
+                          .productId,
+                    ),
                   );
                 },
                 crossAxisCount: 2));

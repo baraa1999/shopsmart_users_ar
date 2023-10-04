@@ -1,9 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopsmart_users_ar/models/product_model.dart';
 import 'package:shopsmart_users_ar/providers/cart_provider.dart';
 import 'package:shopsmart_users_ar/providers/product_provider.dart';
+import 'package:shopsmart_users_ar/providers/viewed_product_provider.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/product_details.dart';
 import 'package:shopsmart_users_ar/widgets/products/heart_btn.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
@@ -28,6 +28,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     final productProvider = Provider.of<ProductProvider>(context);
     final getCurrentProduct = productProvider.findByproId(widget.productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewdProvider = Provider.of<ViewedProdProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return getCurrentProduct == null
@@ -36,6 +37,8 @@ class _ProductWidgetState extends State<ProductWidget> {
             padding: const EdgeInsets.all(3.0),
             child: GestureDetector(
               onTap: () async {
+                viewdProvider.addProductToHistory(
+                    productId: getCurrentProduct.productId);
                 await Navigator.pushNamed(context, ProductDetails.routeName,
                     arguments: getCurrentProduct.productId);
               },
