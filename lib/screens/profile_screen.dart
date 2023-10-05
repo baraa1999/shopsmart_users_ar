@@ -8,11 +8,10 @@ import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
 import 'package:shopsmart_users_ar/services/my_app_methode.dart';
+import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
-
 import '../providers/theme_provider.dart';
-import '../widgets/app_name_text.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,16 +21,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // auth
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const AppNameTextWidget(
-            fontSize: 20,
-          ),
+          title: const AppNameTextWidget(fontSize: 20),
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(AssetsManager.shoppingCart),
@@ -79,9 +75,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitlesTextWidget(label: "Baraa Alian"),
-                        SubtitleTextWidget(
-                            label: "coding.with.Baraa@gmail.com"),
+                        TitlesTextWidget(label: "Hadi Kachmar"),
+                        SubtitleTextWidget(label: "coding.with.hadi@gmail.com"),
                       ],
                     ),
                   ],
@@ -101,7 +96,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: "All orders",
                       function: () async {
                         await Navigator.pushNamed(
-                            context, OrdersScreenFree.routeName);
+                          context,
+                          OrdersScreenFree.routeName,
+                        );
                       },
                     ),
                     CustomListTile(
@@ -109,7 +106,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: "Wishlist",
                       function: () async {
                         await Navigator.pushNamed(
-                            context, WishListScreen.routeName);
+                          context,
+                          WishListScreen.routeName,
+                        );
                       },
                     ),
                     CustomListTile(
@@ -117,7 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: "Viewed recently",
                       function: () async {
                         await Navigator.pushNamed(
-                            context, ViewedRecentlyScreen.routeName);
+                          context,
+                          ViewedRecentlyScreen.routeName,
+                        );
                       },
                     ),
                     CustomListTile(
@@ -164,22 +165,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  // auth
                   icon: Icon(user == null ? Icons.login : Icons.logout),
                   label: Text(
-                    // auth
                     user == null ? "Login" : "Logout",
                   ),
                   onPressed: () async {
-                    // auth
                     if (user == null) {
-                      await Navigator.pushNamed(context, LoginScreen.routName);
+                      await Navigator.pushNamed(
+                        context,
+                        LoginScreen.routName,
+                      );
                     } else {
                       await MyAppMethods.showErrorORWarningDialog(
-                          context: context,
-                          subtitle: 'Are you Sure',
-                          fct: () async {},
-                          isError: false);
+                        context: context,
+                        subtitle: "Are you sure?",
+                        fct: () async {
+                          await FirebaseAuth.instance.signOut();
+                          if (!mounted) return;
+                          await Navigator.pushNamed(
+                            context,
+                            LoginScreen.routName,
+                          );
+                        },
+                        isError: false,
+                      );
                     }
                   },
                 ),

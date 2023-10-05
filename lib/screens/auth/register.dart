@@ -76,17 +76,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         setState(() {
           _isLoading = true;
         });
-        // auth users and email
         await auth.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
-        ); // show toast
+        );
         Fluttertoast.showToast(
           msg: "An account has been created",
           toastLength: Toast.LENGTH_SHORT,
           textColor: Colors.white,
         );
-        // see error
       } on FirebaseAuthException catch (error) {
         await MyAppMethods.showErrorORWarningDialog(
           context: context,
