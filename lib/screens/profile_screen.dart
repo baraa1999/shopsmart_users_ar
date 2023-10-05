@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -6,15 +7,23 @@ import 'package:shopsmart_users_ar/screens/inner_screens/orders/orders_screen.da
 import 'package:shopsmart_users_ar/screens/inner_screens/viewed_recently.dart';
 import 'package:shopsmart_users_ar/screens/inner_screens/wishlist.dart';
 import 'package:shopsmart_users_ar/services/assets_manger.dart';
+import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
 import 'package:shopsmart_users_ar/widgets/titile_text.dart';
 
 import '../providers/theme_provider.dart';
 import '../widgets/app_name_text.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  // auth
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -155,17 +164,23 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  icon: const Icon(Icons.login),
-                  label: const Text(
-                    "Login",
+                  // auth
+                  icon: Icon(user == null ? Icons.login : Icons.logout),
+                  label: Text(
+                    // auth
+                    user == null ? "Login" : "Logout",
                   ),
                   onPressed: () async {
-                    await Navigator.pushNamed(context, LoginScreen.routName);
-                    // await MyAppMethods.showErrorORWarningDialog(
-                    //     context: context,
-                    //     subtitle: 'Are you Sure',
-                    //     fct: () {},
-                    //     isError: false);
+                    // auth
+                    if (user == null) {
+                      await Navigator.pushNamed(context, LoginScreen.routName);
+                    } else {
+                      await MyAppMethods.showErrorORWarningDialog(
+                          context: context,
+                          subtitle: 'Are you Sure',
+                          fct: () async {},
+                          isError: false);
+                    }
                   },
                 ),
               ),

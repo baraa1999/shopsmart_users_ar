@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopsmart_users_ar/consts/my_valditors.dart';
+import 'package:shopsmart_users_ar/root_screen.dart';
 import 'package:shopsmart_users_ar/screens/auth/forget_password.dart';
 import 'package:shopsmart_users_ar/screens/auth/register.dart';
+import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/auths/google_btn.dart';
 import 'package:shopsmart_users_ar/widgets/subtitle_text.dart';
@@ -23,6 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   late final FocusNode _passwordFocusNode;
   late final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
+  bool _isLoading = false;
+  final auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -43,10 +50,50 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+// function login
   Future<void> _loginFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-    if (isValid) {}
+
+    if (isValid) {
+      _formKey.currentState!.save();
+
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        // auth sign in email and password
+        await auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        ); // show toast
+        Fluttertoast.showToast(
+          msg: "Login Successful",
+          toastLength: Toast.LENGTH_SHORT,
+          textColor: Colors.white,
+        );
+        // important to avoid error
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
+        // see error
+      } on FirebaseAuthException catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "An error has been occured ${error.message}",
+          fct: () {},
+        );
+      } catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "An error has been occured $error",
+          fct: () {},
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
