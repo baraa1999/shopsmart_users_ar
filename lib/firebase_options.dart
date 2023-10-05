@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,6 +43,15 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCQEfs4lxz6cwxylanoZY9BGtPmOC0cVnk',
+    appId: '1:402777997671:web:455a64d2fb16cb34ef2fc2',
+    messagingSenderId: '402777997671',
+    projectId: 'shopsmart2023-f2cb9',
+    authDomain: 'shopsmart2023-f2cb9.firebaseapp.com',
+    storageBucket: 'shopsmart2023-f2cb9.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDY7L5RPHQ9pf8PxbhGZddBETBpFH1ISYw',
     appId: '1:402777997671:android:0862129f77feac5cef2fc2',
@@ -60,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '402777997671',
     projectId: 'shopsmart2023-f2cb9',
     storageBucket: 'shopsmart2023-f2cb9.appspot.com',
+    iosClientId: '402777997671-9mg6844oc2iou9hmoqht0sffejenifau.apps.googleusercontent.com',
     iosBundleId: 'com.example.shopsmartUsersAr',
   );
 
@@ -69,6 +76,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '402777997671',
     projectId: 'shopsmart2023-f2cb9',
     storageBucket: 'shopsmart2023-f2cb9.appspot.com',
+    iosClientId: '402777997671-e5ja4odos62sp5klvlklv4icthk6u7nu.apps.googleusercontent.com',
     iosBundleId: 'com.example.shopsmartUsersAr.RunnerTests',
   );
 }

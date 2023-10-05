@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopsmart_users_ar/consts/my_valditors.dart';
 import 'package:shopsmart_users_ar/services/my_app_methode.dart';
@@ -27,8 +29,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _confirmPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
-
+  bool _isLoading = false;
   XFile? _pickedImage;
+  final auth = FirebaseAuth.instance;
   @override
   void initState() {
     _nameController = TextEditingController();
@@ -60,13 +63,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-    if (_pickedImage == null) {
-      MyAppMethods.showErrorORWarningDialog(
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      // if (_pickedImage == null) {
+      //   MyAppMethods.showErrorORWarningDialog(
+      //       context: context,
+      //       subtitle: "Make sure to pick up an image",
+      //       fct: () {});
+      // }
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        // auth users and email
+        await auth.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        ); // show toast
+        Fluttertoast.showToast(
+          msg: "An account has been created",
+          toastLength: Toast.LENGTH_SHORT,
+          textColor: Colors.white,
+        );
+        // see error
+      } on FirebaseAuthException catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
           context: context,
-          subtitle: "Make sure to pick up an image",
-          fct: () {});
+          subtitle: "An error has been occured ${error.message}",
+          fct: () {},
+        );
+      } catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "An error has been occured $error",
+          fct: () {},
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
-    if (isValid) {}
   }
 
   Future<void> localImagePicker() async {
@@ -252,7 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 25.0,
                       ),
                       SizedBox(
                         width: double.infinity,
