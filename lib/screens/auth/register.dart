@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopsmart_users_ar/consts/my_valditors.dart';
+import 'package:shopsmart_users_ar/root_screen.dart';
 import 'package:shopsmart_users_ar/services/my_app_methode.dart';
 import 'package:shopsmart_users_ar/widgets/app_name_text.dart';
 import 'package:shopsmart_users_ar/widgets/auths/pick_image_widget.dart';
@@ -76,15 +77,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
         setState(() {
           _isLoading = true;
         });
+        // auth
         await auth.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+        // toast
         Fluttertoast.showToast(
           msg: "An account has been created",
           toastLength: Toast.LENGTH_SHORT,
           textColor: Colors.white,
         );
+        //avoid error
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
       } on FirebaseAuthException catch (error) {
         await MyAppMethods.showErrorORWarningDialog(
           context: context,
